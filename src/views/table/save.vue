@@ -1,17 +1,17 @@
 <template>
   <div class="app-container">
     <el-form ref="user" :model="user" :rules="validateRules" label-width="120px">
-      <el-form-item label="用户名">
-        <el-input v-model="user.id" />
+      <el-form-item label="编号">
+        <el-input v-model="user.id" :disabled="true" />
       </el-form-item>
       <el-form-item label="设备ID">
-        <el-input v-model="user.deviceId" />
+        <el-input v-model="user.deviceId" :disabled="true" />
       </el-form-item>
       <el-form-item label="经度">
-        <el-input v-model="user.longitude" />
+        <el-input v-model="user.longitude" :disabled="true" />
       </el-form-item>
       <el-form-item label="纬度">
-        <el-input v-model="user.latitude" />
+        <el-input v-model="user.latitude" :disabled="true" />
       </el-form-item>
       <el-form-item label="定位误差（米）">
         <el-input v-model="user.positionError" />
@@ -50,54 +50,60 @@
         </div>
       </el-form-item>
       <el-form-item label="镇">
-        <el-input v-model="user.town" />
+        <el-input v-model="user.town" :disabled="true" />
       </el-form-item>
       <el-form-item label="村">
-        <el-input v-model="user.village" />
+        <el-input v-model="user.village" :disabled="true" />
       </el-form-item>
       <el-form-item label="作业人">
         <el-input v-model="user.operator" />
       </el-form-item>
       <el-form-item label="小班">
-        <el-input v-model="user.xb" />
+        <el-input v-model="user.xb" :disabled="true" />
       </el-form-item>
       <el-form-item label="大班">
-        <el-input v-model="user.db" />
+        <el-input v-model="user.db" :disabled="true" />
       </el-form-item>
       <el-form-item label="二维码">
         <div class="demo-image">
+          <span class="demonstration">{{ user.qrcode }}</span>
           <div class="block">
             <el-image
               style="width: 100px; height: 100px"
-              :src="user.qrcode"
+              :src="qrcode.codeUrl"
             />
           </div>
         </div>
       </el-form-item>
       <el-form-item label="项目编号">
-        <el-input v-model="user.projectId" />
+
+        <el-input v-model="user.projectId" :disabled="true">
+          <template slot="append">{{ project.name }}</template>
+        </el-input>
+
       </el-form-item>
-      <el-form-item label="逻辑删除">
+      <!-- <el-form-item label="逻辑删除">
         <el-select v-model="user.isDeleted" placeholder="please select your type">
-          <el-option label="APP用户" value="1" />
-          <el-option label="平台用户" value="0" />
+          <el-option v-for="item in options" :key="item.value" :label="item.text" :value="item.value" />
         </el-select>
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="用户ID">
-        <el-input v-model="user.userId" />
+
+        <el-input v-model="user.userId" :disabled="true">
+          <template slot="append">{{ member.mobile }}</template>
+        </el-input>
+
       </el-form-item>
       <el-form-item label="袋数">
         <el-input v-model="user.bagNumber" />
       </el-form-item>
       <el-form-item label="防治业务类型">
         <el-select v-model="user.pestsType" placeholder="please select your Role">
-          <el-option label="ADMIN" value="ADMIN" />
-          <el-option label="GUEST" value="GUEST" />
-          <el-option label="USER" value="USER" />
+          <el-option v-for="item in pestsTypeoptions" :key="item.value" :label="item.text" :value="item.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="创建时间">
-        <el-input v-model="user.stime" />
+        <el-input v-model="user.stime" :disabled="true" />
       </el-form-item>
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdate">保存</el-button>
@@ -107,8 +113,10 @@
 </template>
 
 <script>
-
+import projectApi from '@/api/project'
+import memberApi from '@/api/member'
 import userApi from '@/api/table'
+import qrcodeApi from '@/api/qrcode'
 
 const defaultForm = {
   id: '',
@@ -149,11 +157,23 @@ export default {
   data() {
     return {
       user: defaultForm,
+      member: {},
+      project: {},
+      qrcode: {},
       saveBtnDisabled: false, // 保存按钮是否禁用,
       validateRules: {
         username: [{ required: true, trigger: 'blur', message: '用户名必须输入' }],
         password: [{ required: true, trigger: 'blur', validator: validatePass }]
-      }
+      },
+      options: [
+        { value: 1, text: '已删除' },
+        { value: 0, text: '未删除' }
+      ],
+      pestsTypeoptions: [
+        { value: '诱木', text: '诱木' },
+        { value: '诱捕器', text: '诱捕器' },
+        { value: '砍倒的树', text: '砍倒的树' }
+      ]
     }
   },
 
@@ -231,10 +251,18 @@ export default {
     // 根据id查询记录
     fetchDataById(id) {
       userApi.getById(id).then(response => {
-        this.user = response.data
+        this.user = response.data.teacher
+        projectApi.getById(this.user.userId).then(response => {
+          this.project = response.data.teacher
+        })
+        memberApi.getById(this.user.projectId).then(response => {
+          this.member = response.data.teacher
+        })
+        qrcodeApi.getOneByQrcode(this.user.qrcode).then(response => {
+          this.qrcode = response.data.teacher
+        })
       })
     }
-
   }
 }
 </script>

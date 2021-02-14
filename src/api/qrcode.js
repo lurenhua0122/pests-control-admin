@@ -25,7 +25,12 @@ export default {
       method: 'get'
     })
   },
-
+  getOneByQrcode(codeNumber) {
+    return request({
+      url: `${api_name}/getOneByQrcode/${codeNumber}`,
+      method: 'get'
+    })
+  },
   save(params) {
     return request({
       url: `${api_name}/save`,

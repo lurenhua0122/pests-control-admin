@@ -5,7 +5,7 @@
 <script lang="ts">
 import { loadModules } from 'esri-loader'
 import pests from '@/api/table'
-
+import { Message } from 'element-ui'
 export default {
   data() {
     return {
@@ -59,6 +59,12 @@ export default {
             center: [120.52, 31.53],
             zoom: 8
           })
+          // Add this action to the popup so it is always available in this view
+          var measureThisAction = {
+            title: '删除记录',
+            id: 'measure-this',
+            image: 'https://pestscontrol.oss-cn-hangzhou.aliyuncs.com/sys/Delete.png'
+          }
           // 球面墨卡托投影矢量底图
           var tiledLayer = new WebTileLayer({
             urlTemplate:
@@ -83,37 +89,41 @@ export default {
           const graphicsLayer = new GraphicsLayer()
           map.add(graphicsLayer)
 
-          pests.getList().then((response) => {
-            this.list = response.data.items
-            console.log(this.list)
-            this.list.forEach(element => {
-              const point = {
-                // Create a point
-                type: 'point',
-                longitude: element.longitude,
-                latitude: element.latitude
-              }
-              const simpleMarkerSymbol = {
-                type: 'simple-marker',
-                color: [226, 119, 40], // Orange
-                outline: {
-                  color: [255, 255, 255], // White
-                  width: 1
-                }
-              }
-              console.log(element.toString())
-              const popupTemplate = {
-                title: '{Name}',
-                content: `<div id="selected_rcds_detail" style="">
+          var graphicTools = {
+            initGraphic() {
+              graphicsLayer.removeAll()
+              pests.getList().then((response) => {
+                this.list = response.data.items
+                console.log(this.list)
+                this.list.forEach(element => {
+                  const point = {
+                    // Create a point
+                    type: 'point',
+                    longitude: element.longitude,
+                    latitude: element.latitude
+                  }
+                  const simpleMarkerSymbol = {
+                    type: 'simple-marker',
+                    color: [226, 119, 40], // Orange
+                    outline: {
+                      color: [255, 255, 255], // White
+                      width: 1
+                    }
+                  }
+                  console.log(element.toString())
+                  const popupTemplate = {
+                    title: '{Name}',
+                    actions: [measureThisAction],
+                    content: `<div id="selected_rcds_detail" style="">
                   <table class="field_value_tbl" id="select_detail_basic_tbl">
                     <tbody>
                       <tr>
                         <td class="name_column">采集时间</td>
-                        <td class="value_column">2021/1/13 上午10:23:06</td>
+                        <td class="value_column">{stime}</td>
                       </tr>
                       <tr>
                         <td class="name_column">采集设备</td>
-                        <td class="value_column">ID10972 ( 陈冬冬 )</td>
+                        <td class="value_column">{deviceId}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -129,7 +139,7 @@ export default {
                       </tr>
                       <tr>
                         <td class="name_column">树径</td>
-                        <td class="value_column">10-20cm</td>
+                        <td class="value_column">{treeWalk}</td>
                       </tr>
                       <tr>
                         <td colspan="2" class="photo_column">
@@ -187,27 +197,27 @@ export default {
                       </tr>
                       <tr>
                         <td class="name_column">镇</td>
-                        <td class="value_column">内厝镇</td>
+                        <td class="value_column">{town}</td>
                       </tr>
                       <tr>
                         <td class="name_column">村</td>
-                        <td class="value_column">许厝村</td>
+                        <td class="value_column">{village}</td>
                       </tr>
                       <tr>
                         <td class="name_column">作业人</td>
-                        <td class="value_column">龙英han</td>
+                        <td class="value_column">{operator}</td>
                       </tr>
                       <tr>
                         <td class="name_column">小班</td>
                         <td class="value_column">
                           <div class="action_text record_detail_link" data-recordid="17499">
-                            020
+                            {xb}
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td class="name_column">大班</td>
-                        <td class="value_column">02</td>
+                        <td class="value_column">{db}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -217,53 +227,75 @@ export default {
                         <td class="name_column">二维码编号</td>
                         <td class="value_column">
                           <div class="action_text entity_detail_link" data-entityid="17499">
-                            15385
+                            {qrcode}
                           </div>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                  <div class="delete_rcd_button button">删除记录</div>
                 </div>`
-              }
-              const attributes = {
-                Name: '节点' + element.id,
-                appId: element.appId,
-                bagNumber: element.bagNumber,
-                db: element.db,
-                deviceId: element.deviceId,
-                fellPic: element.fellPic,
-                finishPic: element.finishPic,
-                gmtCreate: element.gmtCreate,
-                gmtModified: element.gmtModified,
-                id: element.id,
-                isDeleted: element.isDeleted,
-                latitude: element.latitude,
-                longitude: element.longitude,
-                operator: element.operator,
-                pestsType: element.pestsType,
-                positionError: element.positionError,
-                projectId: element.projectId,
-                qrcode: element.qrcode,
-                stime: element.stime,
-                stumpPic: element.stumpPic,
-                town: element.town,
-                treeWalk: element.treeWalk,
-                userId: element.userId,
-                village: element.village,
-                xb: element.xb
-              }
+                  }
+                  const attributes = {
+                    Name: '节点' + element.id,
+                    appId: element.appId,
+                    bagNumber: element.bagNumber,
+                    db: element.db,
+                    deviceId: element.deviceId,
+                    fellPic: element.fellPic,
+                    finishPic: element.finishPic,
+                    gmtCreate: element.gmtCreate,
+                    gmtModified: element.gmtModified,
+                    id: element.id,
+                    isDeleted: element.isDeleted,
+                    latitude: element.latitude,
+                    longitude: element.longitude,
+                    operator: element.operator,
+                    pestsType: element.pestsType,
+                    positionError: element.positionError,
+                    projectId: element.projectId,
+                    qrcode: element.qrcode,
+                    stime: element.stime,
+                    stumpPic: element.stumpPic,
+                    town: element.town,
+                    treeWalk: element.treeWalk,
+                    userId: element.userId,
+                    village: element.village,
+                    xb: element.xb
+                  }
 
-              const pointGraphic = new Graphic({
-                geometry: point,
-                symbol: simpleMarkerSymbol,
-                attributes: attributes,
-                popupTemplate: popupTemplate
+                  const pointGraphic = new Graphic({
+                    geometry: point,
+                    symbol: simpleMarkerSymbol,
+                    attributes: attributes,
+                    popupTemplate: popupTemplate
+                  })
+                  graphicsLayer.add(pointGraphic)
+                })
               })
-              graphicsLayer.add(pointGraphic)
-            })
+            }
+          }
+          graphicTools.initGraphic()
+          // Event handler that fires each time an action is clicked.
+          view.popup.on('trigger-action', function(event) {
+          // Execute the measureThis() function if the measure-this action is clicked
+            if (event.action.id === 'measure-this') {
+              var graphic = view.popup.selectedFeature
+              var geometry = view.popup.selectedFeature.geometry
+              view.popup.close()
+              var pestsobject = graphic.attributes
+              pests.delete(pestsobject.id).then(response1 => {
+                if (response1.success) {
+                  Message({
+                    type: 'success',
+                    message: response1.message
+                  })
+                  graphicTools.initGraphic()
+                }
+              })
+              console.log('tag', graphic)
+              console.log('tag', geometry)
+            }
           })
-
           console.info(view, 11111)
         }
       )

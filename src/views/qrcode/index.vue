@@ -49,19 +49,14 @@
           {{ scope.row.codeNumber }}
         </template>
       </el-table-column>
-      <el-table-column label="用户">
+      <!-- <el-table-column label="用户">
         <template slot-scope="scope">
           <span>{{ scope.row.userId }}</span>
         </template>
-      </el-table-column>
+      </el-table-column> -->
       <el-table-column label="二维码">
         <template slot-scope="scope">
           <img :src="scope.row.codeUrl" style="width: 100px;height: 100px;" :title="scope.row.codeUrl">
-        </template>
-      </el-table-column>
-      <el-table-column label="删除？">
-        <template slot-scope="scope">
-          {{ scope.row.isDeleted }}
         </template>
       </el-table-column>
       <!-- <el-table-column class-name="status-col" label="Status" width="110" align="center">
@@ -93,12 +88,14 @@
 
 <script>
 import qrcodeApi from '@/api/qrcode'
+import memberApi from '@/api/member'
 
 export default {
   // 写核心代码位置
   data() {
     // 定义变量和初始值
     return {
+      member: null,
       list: null, // 查询之后接口返回集合
       page: 1, // 当前页
       limit: 10, // 每页记录数
@@ -153,6 +150,11 @@ export default {
           this.getList()
         })
       }) // 点击取消，执行catch方法
+    },
+    getMemberById(id) {
+      memberApi.getById(id).then(response => {
+        this.member = response.data
+      })
     }
   }
 }
