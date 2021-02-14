@@ -1,102 +1,252 @@
-# vue-admin-template
+# 有害生物防治定位管理系统
 
-> 这是一个极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint，这些搭建后台必要的东西。
 
-[线上地址](http://panjiachen.github.io/vue-admin-template)
 
-[国内访问](https://panjiachen.gitee.io/vue-admin-template)
 
-目前版本为 `v4.0+` 基于 `vue-cli` 进行构建，若你想使用旧版本，可以切换分支到[tag/3.11.0](https://github.com/PanJiaChen/vue-admin-template/tree/tag/3.11.0)，它不依赖 `vue-cli`。
 
-## Extra
 
-如果你想要根据用户角色来动态生成侧边栏和 router，你可以使用该分支[permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
 
-## 相关项目
 
-- [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 
-- [electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
 
-- [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
 
-- [awesome-project](https://github.com/PanJiaChen/vue-element-admin/issues/2312)
 
-写了一个系列的教程配套文章，如何从零构建后一个完整的后台项目:
 
-- [手摸手，带你用 vue 撸后台 系列一(基础篇)](https://juejin.im/post/59097cd7a22b9d0065fb61d2)
-- [手摸手，带你用 vue 撸后台 系列二(登录权限篇)](https://juejin.im/post/591aa14f570c35006961acac)
-- [手摸手，带你用 vue 撸后台 系列三 (实战篇)](https://juejin.im/post/593121aa0ce4630057f70d35)
-- [手摸手，带你用 vue 撸后台 系列四(vueAdmin 一个极简的后台基础模板,专门针对本项目的文章,算作是一篇文档)](https://juejin.im/post/595b4d776fb9a06bbe7dba56)
-- [手摸手，带你封装一个 vue component](https://segmentfault.com/a/1190000009090836)
+​																																													厦门奇特信息科技有限公司
 
-## Build Setup
+​																																													2021年1月8日
 
-```bash
-# 克隆项目
-git clone https://github.com/PanJiaChen/vue-admin-template.git
+| 内容           | 版本 | 作者   | 日期       |
+| -------------- | ---- | ------ | ---------- |
+| 初始化版本     | 0.1  | 鲁仁华 | 2020-10-12 |
+| 增加任务       | 0.5  | 罗莉   | 2020-11-15 |
+| 增加手控       | 0.6  | 鲁仁华 | 2020-12-30 |
+| 增加系统功能   | 0.7  | 鲁仁华 | 2021-1-1   |
+| 修改图片大小   | 1.0  | 罗莉   | 2021-1-11  |
+| 增加服务器地址 | 1.1  | 罗莉   | 2021-1-18  |
+| 增加经纬度设置 | 1.2  | 罗莉   | 2021-1-21  |
+| 修改删除方式   | 1.3  | 鲁仁华 | 2021-1-27  |
 
-# 进入项目目录
-cd vue-admin-template
 
-# 安装依赖
-npm install
 
-# 建议不要直接使用 cnpm 安装以来，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
-npm install --registry=https://registry.npm.taobao.org
 
-# 启动服务
-npm run dev
-```
 
-浏览器访问 [http://localhost:9528](http://localhost:9528)
+### 一、简介
 
-## 发布
+#### 1.1目的
 
-```bash
-# 构建测试环境
-npm run build:stage
+对信号系统的组成部分简要说明；
+对软件操作进行详细的说明；
+用户通过本说明书掌握对软件的操作。
 
-# 构建生产环境
-npm run build:prod
-```
+#### 1.2适用范围
 
-## 其它
+软件使用者，系统管理员，开发人员以及项目实施人员、维护人员等。
 
-```bash
-# 预览发布环境效果
-npm run preview
+#### 1.3术语定义
 
-# 预览发布环境效果 + 静态资源分析
-npm run preview -- --report
+安卓APP：利用电子地图系统将有害防治数据进行整合和扩展，从而达到信息共享、集成联动目的。 
 
-# 代码格式检查
-npm run lint
+服务端：存储数据及aliyun OSS 存储图片。 
 
-# 代码格式检查并自动修复
-npm run lint -- --fix
-```
+防治业务类型：包括  诱木   、砍倒的树  、诱捕器  。 
 
-更多信息请参考 [使用文档](https://panjiachen.github.io/vue-element-admin-site/zh/)
+树径：包括 10cm以下、10-20cm、21-30cm、31-40cm、41cm以上；15、19、23、25、21。 
 
-## 购买贴纸
+袋数：1/4 、 1/3  、 1/2 、1 、2、3、4、5、5以上。 
 
-你也可以通过 购买[官方授权的贴纸](https://smallsticker.com/product/vue-element-admin) 的方式来支持 vue-element-admin - 每售出一张贴纸，我们将获得 2 元的捐赠。
 
-## Demo
 
-![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
+ 
 
-## Browsers support
+### 二、产品组成说明
 
-Modern browsers and Internet Explorer 10+.
+#### 2.1 后台产品
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --------- | --------- | --------- | --------- |
-| IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions
+​	整个系统由多个子系统组成，是集成服务管理，业务数据，权限管理等多个业务子系统的集成管理平台。基于GIS操作，各业务子系统接口协议数据交换格式已经标准化，可方便地接入不同应用系统，实现数据共享和系统联动控制功能，提供统一的接口使用界面。组成部分包括：
 
-## License
+#### 2.2 前端产品
 
-[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
+前端产品便是APP系统，主要基于安卓操作系统，能够将车载定位的数据上传到前端平台。
 
-Copyright (c) 2017-present PanJiaChen
+### 三、系统设计
+
+#### 3.1 限制与约束
+
+每个项目都存在一定的限制和约束，在本项目中存在以下几点的限制和约束：
+1、项目中有GPS定位子系统，所以我们的地图文件必需是wgs84地图，以经纬度来确定坐标系统的地图数据文档
+2、其它子系统的接口开发，限制了管控平台的开发进度
+3、交通设施管理，可将提供路口渠化图文件存入数据库与标记点发生关联，这里主要是地图信息采集时的工作。
+
+### 四、系统功能说明
+
+#### 4.1 系统介绍
+
+![未命名文件](G:\syc\奇特信息\有害生物防治定位管理系统\未命名文件.png).
+
+#### 4.2 前端操作
+
+##### 4.2.1 警卫任务流程
+
+任务的流程图
+
+![管理流程图](G:\syc\奇特信息\有害生物防治定位管理系统\管理流程图.png)
+
+##### 4.2.2 打开APP程序
+
+登陆界面
+
+<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_17-55-24.png" alt="Snipaste_2021-02-10_17-55-24" style="zoom: 80%;" />.<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_17-56-21.png" alt="Snipaste_2021-02-10_17-56-21" style="zoom: 80%;" />
+
+##### 4.2.3主界面
+
+<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-47-15.png" alt="Snipaste_2021-02-10_20-47-15" style="zoom: 80%;" />.<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-48-51.png" alt="Snipaste_2021-02-10_20-48-51" style="zoom: 80%;" />
+
+<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-51-09.png" alt="Snipaste_2021-02-10_20-51-09" style="zoom:80%;" />.<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-51-25.png" alt="Snipaste_2021-02-10_20-51-25" style="zoom:80%;" />
+
+
+
+<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-51-46.png" alt="Snipaste_2021-02-10_20-51-46" style="zoom:80%;" />.<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-53-12.png" alt="Snipaste_2021-02-10_20-53-12" style="zoom:80%;" />
+
+
+
+
+
+##### 4.2.4菜单界面
+
+<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-11_20-58-55.png" alt="Snipaste_2021-02-11_20-58-55" style="zoom:80%;" />.
+
+##### 4.2.5加载离线地图
+
+<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-53-25.png" alt="Snipaste_2021-02-10_20-53-25" style="zoom:80%;" />.<img src="G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-53-34.png" alt="Snipaste_2021-02-10_20-53-34" style="zoom:80%;" />
+
+##### 4.2.6加载地图底图
+
+![Snipaste_2021-02-10_20-53-34](G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-53-34.png).
+
+##### 4.2.7上传数据服务
+
+![Snipaste_2021-02-11_20-58-55](G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-11_20-58-55.png).
+
+
+
+##### 4.2.8我的设置
+
+![Snipaste_2021-02-10_20-53-57](G:\syc\奇特信息\有害生物防治定位管理系统\APP\Snipaste_2021-02-10_20-53-57.png).
+
+
+
+#### 4.3 后台操作
+
+##### 4.3.1登陆界面
+
+![Snipaste_2021-02-09_17-46-59](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_17-46-59.png)
+
+##### 4.3.2主界面
+
+![Snipaste_2021-02-09_18-10-14](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-10-14.png)
+
+##### 4.3.3防治界面
+
+###### 4.3.3.1防治地图界面
+
+![Snipaste_2021-02-09_20-07-26](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_20-07-26.png)
+
+![Snipaste_2021-02-09_18-11-44](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-11-44.png)
+
+###### 4.3.3.2定位工作区域
+
+![Snipaste_2021-02-09_18-11-57](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-11-57.png)
+
+
+
+![Snipaste_2021-02-09_18-12-07](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-12-07.png)
+
+###### 4.3.3.3打开采集数据
+
+![Snipaste_2021-02-09_18-12-21](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-12-21.png)
+
+###### 4.3.3.4放大显示集数数据
+
+![Snipaste_2021-02-09_18-12-33](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-12-33.png)
+
+
+
+
+
+###### 4.3.3.5防治列表界面
+
+![Snipaste_2021-02-09_18-10-53](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-10-53.png)
+
+
+
+
+
+###### 4.3.3.6修改防治数据
+
+![Snipaste_2021-02-09_18-13-10](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-13-10.png)
+
+###### 4.3.3.7删除防治数据
+
+![Snipaste_2021-02-09_18-13-18](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-13-18.png)
+
+
+
+
+
+
+
+##### 4.3.4二维码管理
+
+###### 4.3.4.1列表管理
+
+![Snipaste_2021-02-09_18-13-26](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-13-26.png)
+
+
+
+![Snipaste_2021-02-09_18-14-00](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-14-00.png)
+
+
+
+![Snipaste_2021-02-09_18-14-23](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-14-23.png)
+
+###### 4.3.4.2编号过滤查询
+
+![Snipaste_2021-02-09_18-14-43](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-14-43.png)
+
+###### 4.3.4.3二维码增加
+
+![Snipaste_2021-02-09_18-14-51](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-14-51.png)
+
+
+
+
+
+##### 4.3.5项目列表
+
+
+
+![Snipaste_2021-02-09_18-14-58](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-14-58.png)
+
+
+
+##### 4.3.6当前用户
+
+![Snipaste_2021-02-09_18-15-05](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-15-05.png)
+
+##### 4.3.7退出登陆
+
+![Snipaste_2021-02-09_18-15-13](G:\syc\奇特信息\有害生物防治定位管理系统\有害防治\Snipaste_2021-02-09_18-15-13.png)
+
+
+
+
+
+### 五、 设备要求
+
+| 序号 | 名称     | 规格                                     |
+| ---- | -------- | ---------------------------------------- |
+| 1    | ARM      | 麒麟 881以上                             |
+| 2    | 储存     | 64G                                      |
+| 3    | 运行内存 | 6G                                       |
+| 4    | android  | 10.0以上的版本，2018年以后出的手机都支持 |
